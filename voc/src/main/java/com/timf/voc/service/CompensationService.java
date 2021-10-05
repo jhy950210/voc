@@ -30,7 +30,7 @@ public class CompensationService {
 
     @Transactional
     public Long saveCompensationWithVoc(Long id, Compensation compensation){
-        VOC voc = vocRepository.findById(id).get();
+        VOC voc = vocRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
         voc.setCompensation(compensation);
 
         compensationRepository.save(compensation);

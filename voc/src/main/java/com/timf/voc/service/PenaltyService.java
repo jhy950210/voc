@@ -19,7 +19,7 @@ public class PenaltyService {
     private final VocRepository vocRepository;
 
     public Penalty findOne(Long id){
-        Penalty penalty = penaltyRepository.findById(id).get();
+        Penalty penalty = penaltyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
         return penalty;
     }
 
@@ -31,7 +31,7 @@ public class PenaltyService {
 
     @Transactional
     public Long savePenaltyWithVoc(Long id, Penalty penalty){
-        VOC voc = vocRepository.findById(id).get();
+        VOC voc = vocRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
 
         voc.setPenalty(penalty);
 
